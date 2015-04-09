@@ -12,6 +12,7 @@ tokens :-
   $white+				;
   "--".*				;
   let					{ tok (\p s -> Let p) }
+  class					{ tok (\p s -> Class p) }
   in					{ tok (\p s -> In p) }
   $digit+				{ tok (\p s -> Int p (read s)) }
   [\=\+\-\*\/\(\)]			{ tok (\p s -> Sym p (head s)) }
@@ -26,6 +27,7 @@ tok f p s = f p s
 -- The token type:
 data Token =
 	Let AlexPosn		|
+	Class AlexPosn		|
 	In  AlexPosn		|
 	Sym AlexPosn Char	|
 	Var AlexPosn String	|
